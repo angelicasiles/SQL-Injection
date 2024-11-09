@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Cuentas Bancarias</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans text-gray-800">
+
+    <!-- Contenedor principal -->
+    <div class="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-10">
+        <h1 class="text-3xl font-semibold text-center text-indigo-600 mb-6">Buscar Cuenta Bancaria</h1>
+
+        <!-- Formulario de búsqueda -->
+        <form method="POST" action="/buscar" class="space-y-6">
+            <div>
+                <label for="busqueda" class="block text-lg font-medium text-gray-700">Nombre de Usuario o Número de Cuenta:</label>
+                <input type="text" id="busqueda" name="busqueda" required
+                    class="mt-2 px-4 py-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+            </div>
+            <button type="submit" class="w-full py-2 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-500">
+                Buscar
+            </button>
+        </form>
+
+        <!-- Resultados de la búsqueda -->
+        {% if cuentas %}
+        <div class="mt-8">
+            <h2 class="text-2xl font-semibold text-indigo-600 mb-4">Resultado de la Búsqueda</h2>
+            <table class="w-full table-auto border-collapse border border-gray-300 rounded-lg overflow-hidden">
+                <thead class="bg-indigo-600 text-white">
+                    <tr>
+                        <th class="px-4 py-2 text-left">Nombre de Usuario</th>
+                        <th class="px-4 py-2 text-left">Número de Cuenta</th>
+                        <th class="px-4 py-2 text-left">Saldo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cuenta in cuentas %}
+                    <tr class="bg-gray-50 hover:bg-gray-100">
+                        <td class="px-4 py-2">{{ cuenta.nombre_usuario }}</td>
+                        <td class="px-4 py-2">{{ cuenta.numero_cuenta }}</td>
+                        <td class="px-4 py-2">{{ cuenta.saldo }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>
